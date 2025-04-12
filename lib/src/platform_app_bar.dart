@@ -4,6 +4,10 @@
  * See LICENSE for distribution and usage details.
  */
 
+// Method is edited since the orginal lacks a method to define automaticBackgroundVisibility
+// Defines whether the navigation bar appears transparent when no content is scrolled under.
+// automaticBackgroundVisibility: data?.automaticBackgroundVisibility ?? true,
+
 import 'package:flutter/cupertino.dart' show CupertinoNavigationBar;
 import 'package:flutter/material.dart' show AppBar, Brightness;
 import 'package:flutter/services.dart';
@@ -120,7 +124,10 @@ class CupertinoNavigationBarData extends _BaseData {
     this.brightness,
     this.heroTag,
     this.noMaterialParent = false,
+    this.automaticBackgroundVisibility = false,
   });
+
+  final bool? automaticBackgroundVisibility;
 
   final Widget? trailing;
   final Border? border;
@@ -223,6 +230,10 @@ class PlatformAppBar
     if (heroTag != null) {
       return CupertinoNavigationBar(
         key: data?.widgetKey ?? widgetKey,
+        // Defines whether the navigation bar appears transparent when no content is scrolled under.
+        automaticBackgroundVisibility:
+            data?.automaticBackgroundVisibility ?? false,
+
         middle: _getMiddleCupertinoWidget(context, data),
         backgroundColor: data?.backgroundColor ?? backgroundColor,
         automaticallyImplyLeading: data?.automaticallyImplyLeading ??
@@ -246,6 +257,10 @@ class PlatformAppBar
 
     return CupertinoNavigationBar(
       key: data?.widgetKey ?? widgetKey,
+      // Defines whether the navigation bar appears transparent when no content is scrolled under.
+      automaticBackgroundVisibility:
+          data?.automaticBackgroundVisibility ?? false,
+
       middle: _getMiddleCupertinoWidget(context, data),
       backgroundColor: data?.backgroundColor ?? backgroundColor,
       automaticallyImplyLeading:
